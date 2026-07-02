@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ใบสมัครงาน FM-HRS-03</title>
+<style>
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'TH Sarabun New','Sarabun','Tahoma',sans-serif; font-size:13px; color:#000; background:#e0e0e0; }
+
+.topbar { background:#fff; border-bottom:1px solid #ccc; padding:10px 24px; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:99; }
+.topbar-title { font-size:15px; font-weight:bold; }
+.topbar-sub { font-size:11px; color:#666; }
+.btn-print { background:#111; color:#fff; border:none; padding:8px 24px; font-size:13px; font-family:inherit; cursor:pointer; }
+.btn-print:hover { background:#333; }
+
+.wrap { display:flex; flex-direction:column; align-items:center; padding:24px 16px 60px; gap:20px; }
+
+.page { background:#fff; width:794px; padding:18px 28px 16px; border:1px solid #bbb; box-shadow:0 2px 8px rgba(0,0,0,0.1); }
+
+.ttl { text-align:center; font-size:19px; font-weight:bold; }
+.ttl-en { text-align:center; font-size:13px; margin-bottom:5px; }
+.sec { font-weight:bold; font-size:12.5px; border-bottom:1px solid #000; margin:5px 0 3px; padding-bottom:1px; }
+.lbl { font-size:10.5px; }
+.lbl-en { font-size:9px; color:#555; }
+.flb { display:flex; flex-direction:column; }
+
+input.ul, select.ul { border:none; border-bottom:1px solid #000; outline:none; font-family:inherit; font-size:12px; color:#000; background:transparent; padding:0 2px; line-height:17px; width:100%; }
+input.ul:focus, select.ul:focus { background:#f5f5f5; }
+textarea.ta { border:1px solid #000; outline:none; font-family:inherit; font-size:11px; color:#000; background:transparent; padding:2px 3px; width:100%; resize:none; }
+textarea.ta:focus { background:#f5f5f5; }
+
+.row { display:flex; align-items:flex-end; gap:5px; margin-bottom:2px; }
+.f1{flex:1;min-width:0;} .f2{flex:2;min-width:0;} .f3{flex:3;min-width:0;} .f4{flex:4;min-width:0;}
+
+.ck { display:inline-flex; align-items:center; gap:2px; font-size:11px; white-space:nowrap; cursor:pointer; }
+.ck input { width:auto; cursor:pointer; }
+
+table.t { width:100%; border-collapse:collapse; font-size:10.5px; }
+table.t th { border:1px solid #000; background:#eee; padding:2px 3px; text-align:center; font-size:10px; line-height:1.3; font-weight:bold; }
+table.t td { border:1px solid #000; padding:1px 3px; vertical-align:middle; }
+table.t td input.ul { font-size:10px; line-height:15px; }
+
+.photo-box { width:110px; height:135px; border:1px solid #000; display:flex; flex-direction:column; align-items:center; justify-content:center; cursor:pointer; overflow:hidden; position:relative; flex-shrink:0; }
+.photo-box img { width:100%; height:100%; object-fit:cover; position:absolute; }
+.photo-lbl { font-size:9.5px; color:#666; text-align:center; line-height:1.4; padding:4px; position:relative; }
+
+.dg { display:flex; gap:2px; align-items:flex-end; }
+.dg select.ul { font-size:10.5px; }
+
+.wb { border:1px solid #000; margin-bottom:3px; }
+.wb-hdr { background:#f0f0f0; font-size:11px; font-weight:bold; padding:1px 5px; border-bottom:1px solid #000; }
+
+.cond { display:flex; align-items:center; font-size:11px; border-bottom:1px dashed #bbb; padding:4px 0; }
+.cond-t { flex:1; line-height:1.4; padding-right:5px; }
+.cond-c { display:flex; gap:12px; white-space:nowrap; }
+
+.co-box { border:1px solid #000; padding:5px 8px; margin-top:5px; }
+.pg-code { text-align:right; font-size:9px; margin-top:6px; }
+
+.sig-area { display:flex; gap:12px; margin-top:6px; }
+.btn-save { background:#1a6b3c; color:#fff; border:none; padding:8px 24px; font-size:13px; font-family:inherit; cursor:pointer; }
+.btn-save:hover { background:#145530; }
+.btn-save:disabled { background:#888; cursor:not-allowed; }
+#loading-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:999; justify-content:center; align-items:center; flex-direction:column; }
+
+#confirm-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.65); z-index:998; justify-content:center; align-items:center; }
+#confirm-overlay.active { display:flex; }
+.confirm-box { background:#fff; width:520px; border-radius:6px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.confirm-header { background:#1a6b3c; color:#fff; padding:16px 24px; }
+.confirm-header h3 { font-size:16px; font-weight:bold; margin-bottom:2px; }
+.confirm-header p { font-size:12px; opacity:0.85; }
+.confirm-body { padding:20px 24px; }
+.confirm-warning { background:#fff8e1; border-left:4px solid #f5a623; padding:10px 14px; margin-bottom:14px; font-size:12.5px; line-height:1.6; border-radius:0 4px 4px 0; }
+.confirm-docs { background:#f5f5f5; border-radius:4px; padding:12px 16px; margin-bottom:14px; }
+.confirm-docs p { font-size:12px; font-weight:bold; color:#333; margin-bottom:8px; }
+.confirm-docs ol { margin-left:1.2em; font-size:12px; line-height:1.9; color:#444; }
+.confirm-footer { display:flex; gap:10px; justify-content:flex-end; padding:12px 24px; border-top:1px solid #eee; background:#fafafa; }
+.confirm-btn-cancel { background:#fff; color:#555; border:1px solid #ccc; padding:8px 22px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; }
+.confirm-btn-cancel:hover { background:#f0f0f0; }
+.confirm-btn-ok { background:#1a6b3c; color:#fff; border:none; padding:8px 28px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; font-weight:bold; }
+.confirm-btn-ok:hover { background:#145530; }
+#confirm-overlay { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:998; justify-content:center; align-items:center; }
+#confirm-overlay.active { display:flex; }
+.confirm-box { background:#fff; width:520px; border-radius:6px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.25); }
+.confirm-header { background:#1a6b3c; color:#fff; padding:16px 20px; font-size:15px; font-weight:bold; }
+.confirm-body { padding:20px 24px; font-size:13px; line-height:1.7; color:#222; }
+.confirm-body .warn { background:#fff8e1; border-left:4px solid #f5a623; padding:10px 14px; margin-bottom:14px; border-radius:2px; font-size:12.5px; }
+.confirm-body .doc-title { font-weight:bold; margin-bottom:6px; font-size:13px; }
+.confirm-body ol { margin-left:1.4em; font-size:12.5px; }
+.confirm-body ol li { margin-bottom:3px; }
+.confirm-footer { display:flex; justify-content:flex-end; gap:10px; padding:14px 20px; border-top:1px solid #eee; background:#f9f9f9; }
+.confirm-btn-cancel { background:#fff; border:1px solid #ccc; padding:8px 22px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; }
+.confirm-btn-cancel:hover { background:#f0f0f0; }
+.confirm-btn-ok { background:#1a6b3c; color:#fff; border:none; padding:8px 28px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; font-weight:bold; }
+.confirm-btn-ok:hover { background:#145530; }
+#confirm-modal { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:998; justify-content:center; align-items:center; }
+#confirm-modal.active { display:flex; }
+.modal-box { background:#fff; width:520px; max-width:90%; border-radius:6px; overflow:hidden; box-shadow:0 8px 32px rgba(0,0,0,0.2); }
+.modal-header { background:#1a6b3c; color:#fff; padding:16px 20px; }
+.modal-header h2 { font-size:16px; font-weight:bold; margin:0; }
+.modal-body { padding:18px 20px; font-size:13px; line-height:1.7; color:#222; }
+.modal-body .warning { background:#fff8e1; border-left:4px solid #f5a623; padding:10px 14px; margin-bottom:14px; border-radius:2px; font-size:12.5px; }
+.modal-body .doc-list { background:#f5f5f5; padding:10px 14px; border-radius:4px; }
+.modal-body .doc-list p { font-weight:bold; margin-bottom:6px; font-size:12.5px; }
+.modal-body .doc-list ol { margin-left:1.4em; font-size:12px; }
+.modal-body .doc-list li { margin-bottom:3px; }
+.modal-footer { padding:12px 20px; display:flex; gap:10px; justify-content:flex-end; border-top:1px solid #eee; }
+.btn-confirm { background:#1a6b3c; color:#fff; border:none; padding:9px 28px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; }
+.btn-confirm:hover { background:#145530; }
+.btn-cancel-modal { background:#fff; color:#333; border:1px solid #ccc; padding:9px 22px; font-size:13px; font-family:inherit; cursor:pointer; border-radius:3px; }
+.btn-cancel-modal:hover { background:#f5f5f5; }
+#loading-overlay.active { display:flex; }
+.loading-box { background:#fff; padding:32px 48px; text-align:center; border-radius:4px; }
+.loading-box p { font-size:15px; margin-top:12px; color:#333; }
+.sig-box { flex:1; text-align:center; border-top:1px solid #000; padding-top:28px; font-size:11px; }
+
+/* PDPA styles */
+.pdpa-body { font-size:10.5px; line-height:1.75; text-align:justify; }
+.pdpa-body p { margin-bottom:4px; }
+.pdpa-body ul { margin-left:1.8em; margin-bottom:4px; }
+.pdpa-body li { margin-bottom:1px; }
+.pdpa-h { font-weight:bold; margin-bottom:2px; margin-top:5px; font-size:10.5px; }
+
+@media print {
+  @page { size:A4; margin:9mm 11mm; }
+  body { background:#fff; }
+  .topbar { display:none !important; }
+  .wrap { padding:0; gap:0; }
+  .page { width:100%; padding:10px 14px 10px; border:none; box-shadow:none; page-break-after:always; page-break-inside:avoid; }
+  .page:last-child { page-break-after:avoid; }
+  input.ul, select.ul { background:transparent !important; font-size:10px; line-height:14px; }
+  textarea.ta { background:transparent !important; font-size:10px; }
+  .photo-box { border:1px solid #000; }
+  .dg select.ul { font-size:10px; }
+  .ck { font-size:10px; }
+  .lbl { font-size:9.5px; }
+  .lbl-en { font-size:8.5px; }
+  .sec { font-size:11px; margin:3px 0 2px; }
+  .row { margin-bottom:1px; gap:4px; }
+  .ttl { font-size:16px; }
+  .ttl-en { font-size:11px; margin-bottom:3px; }
+  table.t th { font-size:9px; padding:1px 2px; }
+  table.t td { padding:1px 2px; }
+  table.t td input.ul { font-size:9.5px; line-height:13px; }
+  .wb-hdr { font-size:10px; padding:1px 4px; }
+  .cond { font-size:10px; padding:1px 0; }
+  .wb { margin-bottom:2px; }
+  .pdpa-body { font-size:10px; line-height:1.65; }
+  .pdpa-h { font-size:10px; margin-top:4px; }
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="topbar-title">ใบสมัครงาน FM-HRS-03</div>
+    <div class="topbar-sub">บริษัท พี.เอส.ฮอสพิทอล โปรดักส์ จำกัด / บริษัท เจนนิคอน จำกัด</div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <button class="btn-print" onclick="window.print()">พิมพ์</button>
+    <button class="btn-save" onclick="saveAndSend()">บันทึกและส่ง</button>
+  </div>
+</div>
+
+<!-- Confirm Modal -->
+<div id="confirm-modal">
+  <div class="modal-box">
+    <div class="modal-header">
+      <h2>ยืนยันการส่งใบสมัครงาน</h2>
+    </div>
+    <div class="modal-body">
+      <div class="warning">
+        <strong>กรุณาตรวจสอบข้อมูลให้ครบถ้วนก่อนดำเนินการ</strong><br>
+        เมื่อท่านกด <strong>"ยืนยัน"</strong> ระบบจะส่งใบสมัครไปยังฝ่ายทรัพยากรบุคคลทันที และ<strong>ไม่สามารถแก้ไขได้</strong><br>
+        ใบสมัครเป็นส่วนหนึ่งในการพิจารณา ขอให้ท่านกรอกให้ครบถ้วนและเป็นความจริง
+      </div>
+      <div class="doc-list">
+        <p>เอกสารที่ต้องเตรียมสำหรับการสัมภาษณ์</p>
+        <p style="font-weight:normal;font-size:12px;margin-bottom:6px;color:#555;">ขอให้ท่านเข้ารับการสัมภาษณ์ตามวันและเวลาที่ได้นัดหมาย และเตรียมเอกสารประกอบการสัมภาษณ์ดังนี้</p>
+        <ol>
+          <li>รูปถ่าย กรณีที่ท่านไม่ได้แนบรูปถ่ายมาพร้อมใบสมัครออนไลน์นี้</li>
+          <li>สำเนาบัตรประชาชน</li>
+          <li>สำเนาทะเบียนบ้าน</li>
+          <li>สำเนาวุฒิการศึกษา</li>
+          <li>สำเนาใบผ่านการเกณฑ์ทหาร (สำหรับผู้ชาย)</li>
+          <li>สำเนาใบเปลี่ยนชื่อ-สกุล</li>
+          <li>สำเนาใบขับขี่</li>
+        </ol>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel-modal" onclick="closeConfirmModal()">ยกเลิก</button>
+      <button class="btn-confirm" onclick="confirmAndSend()">ยืนยัน ส่งใบสมัคร</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Popup -->
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-header">ยืนยันการส่งใบสมัครงาน</div>
+    <div class="confirm-body">
+      <div class="warn">
+        <strong>กรุณาตรวจสอบข้อมูลก่อนส่ง</strong><br>
+        เมื่อท่านกด <strong>"ยืนยันการส่ง"</strong> ระบบจะดำเนินการส่งใบสมัครให้กับฝ่ายทรัพยากรบุคคลทันที <strong>จะไม่สามารถแก้ไขได้</strong><br>
+        ขอให้ท่านกรอกข้อมูลให้ครบถ้วนและเป็นความจริง เพราะใบสมัครเป็นส่วนหนึ่งในการพิจารณา
+      </div>
+      <div class="doc-title">เอกสารที่ต้องเตรียมสำหรับการสัมภาษณ์</div>
+      <p style="font-size:12px;color:#555;margin-bottom:6px;">ขอให้ท่านเข้ารับการสัมภาษณ์ตามวันและเวลาที่ได้นัดหมาย และเตรียมเอกสารดังนี้</p>
+      <ol>
+        <li>รูปถ่าย <span style="color:#888;font-size:11.5px;">(กรณีที่ท่านไม่ได้แนบรูปถ่ายมาพร้อมใบสมัครออนไลน์นี้)</span></li>
+        <li>สำเนาบัตรประชาชน</li>
+        <li>สำเนาทะเบียนบ้าน</li>
+        <li>สำเนาวุฒิการศึกษา</li>
+        <li>สำเนาใบผ่านการเกณฑ์ทหาร <span style="color:#888;font-size:11.5px;">(สำหรับผู้ชาย)</span></li>
+        <li>สำเนาใบเปลี่ยนชื่อ-สกุล</li>
+        <li>สำเนาใบขับขี่</li>
+      </ol>
+    </div>
+    <div class="confirm-footer">
+      <button class="confirm-btn-cancel" onclick="closeConfirm()">ยกเลิก</button>
+      <button class="confirm-btn-ok" onclick="proceedSend()">ยืนยันการส่ง</button>
+    </div>
+  </div>
+</div>
+
+<!-- Confirm Popup -->
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-header">
+      <h3>ยืนยันการส่งใบสมัครงาน</h3>
+      <p>กรุณาอ่านข้อมูลด้านล่างก่อนดำเนินการ</p>
+    </div>
+    <div class="confirm-body">
+      <div class="confirm-warning">
+        เมื่อท่านกด <strong>"ยืนยัน"</strong> ระบบจะดำเนินการส่งใบสมัครให้กับฝ่ายทรัพยากรบุคคลทันที <strong>จะไม่สามารถแก้ไขได้</strong><br>
+        ขอให้ท่านตรวจสอบอีกครั้งก่อนดำเนินการ เพราะใบสมัครเป็นส่วนหนึ่งในการพิจารณา ขอให้ท่านกรอกให้<strong>ครบถ้วนและเป็นความจริง</strong>
+      </div>
+      <div class="confirm-docs">
+        <p>เอกสารที่ต้องเตรียมสำหรับการสัมภาษณ์</p>
+        <p style="font-size:11.5px;color:#555;margin-bottom:6px;font-weight:normal;">ขอให้ท่านเข้ารับการสัมภาษณ์ตามวันและเวลาที่ได้นัดหมาย และเตรียมเอกสารประกอบการสัมภาษณ์</p>
+        <ol>
+          <li>รูปถ่าย กรณีที่ท่านไม่ได้แนบรูปถ่ายมาพร้อมใบสมัครออนไลน์นี้</li>
+          <li>สำเนาบัตรประชาชน</li>
+          <li>สำเนาทะเบียนบ้าน</li>
+          <li>สำเนาวุฒิการศึกษา</li>
+          <li>สำเนาใบผ่านการเกณฑ์ทหาร สำหรับผู้ชาย</li>
+          <li>สำเนาใบเปลี่ยนชื่อ-สกุล</li>
+          <li>สำเนาใบขับขี่</li>
+        </ol>
+      </div>
+    </div>
+    <div class="confirm-footer">
+      <button class="confirm-btn-cancel" onclick="closeConfirm()">ยกเลิก</button>
+      <button class="confirm-btn-ok" onclick="proceedSend()">ยืนยัน</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loading Overlay -->
+<div id="loading-overlay">
+  <div class="loading-box">
+    <div style="font-size:32px;">⏳</div>
+    <p id="loading-text">กำลังสร้าง PDF...</p>
+  </div>
+</div>
+
+<div class="wrap">
+
+<!-- ===== PAGE 1 ===== -->
+<div class="page">
+  <div class="ttl">แบบฟอร์มสมัครงาน</div>
+  <div class="ttl-en">APPLICATION FORM</div>
+
+  <!-- Header: company + date + photo -->
+  <div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:4px;">
+    <div style="flex:1;">
+      <div style="font-size:10px;font-weight:bold;margin-bottom:2px;">เลือกบริษัทที่ต้องการสมัคร / SELECT COMPANY</div>
+      <label class="ck" style="display:flex;margin-bottom:2px;"><input type="checkbox" name="co" value="ps">&nbsp;<span style="font-size:12.5px;font-weight:bold;">บริษัท พี.เอส.ฮอสพิทอล โปรดักส์ จำกัด</span></label>
+      <label class="ck" style="display:flex;margin-bottom:3px;"><input type="checkbox" name="co" value="jn">&nbsp;<span style="font-size:12.5px;font-weight:bold;">บริษัท เจนนิคอน จำกัด</span></label>
+      <div style="display:flex;align-items:flex-end;gap:4px;">
+        <span class="lbl" style="white-space:nowrap;">วันที่สมัคร / REGISTRATION DATE :</span>
+        <input class="ul" type="text" placeholder="วัน/เดือน/ปี พ.ศ." style="flex:1;">
+      </div>
+    </div>
+    <div style="text-align:center;flex-shrink:0;">
+      <div style="font-size:9.5px;font-weight:bold;margin-bottom:2px;">รูปถ่าย 1 นิ้ว</div>
+      <div class="photo-box" onclick="document.getElementById('photo-inp').click()">
+        <img id="photo-img" src="" style="display:none;">
+        <div class="photo-lbl" id="photo-lbl">คลิกอัปโหลด<br>รูปถ่าย</div>
+      </div>
+      <input type="file" id="photo-inp" accept="image/*" style="display:none;" onchange="prevPhoto(this)">
+      <div style="font-size:9px;color:#666;margin-top:1px;">ไม่เกิน 6 เดือน</div>
+    </div>
+  </div>
+
+  <!-- Position + Salary -->
+  <div style="display:flex;border:1px solid #000;margin-bottom:3px;">
+    <div style="flex:2;padding:2px 5px;border-right:1px solid #000;">
+      <div class="lbl">ตำแหน่งที่ต้องการสมัคร</div><div class="lbl-en">APPLYING FOR</div>
+      <select class="ul" style="margin-top:1px;">
+        <option value="">-- เลือกตำแหน่ง --</option>
+        <option>Human Resource</option>
+        <option>Sale &amp; Customer Service (Medical Device)</option>
+        <option>Product Specialist ผู้เชี่ยวชาญด้านผลิตภัณฑ์เครื่องมือแพทย์</option>
+        <option>Import &amp; Register จัดซื้อและนำเข้า</option>
+      </select>
+    </div>
+    <div style="flex:1;padding:2px 5px;">
+      <div class="lbl">เงินเดือนที่ต้องการ</div><div class="lbl-en">SALARY REQUIRED</div>
+      <input class="ul" type="text" style="margin-top:1px;">
+    </div>
+  </div>
+
+  <!-- Documents -->
+  <div style="border:1px solid #000;padding:2px 6px;margin-bottom:3px;">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:2px;">
+      <span style="font-weight:bold;font-size:11px;">หลักฐานประกอบการสมัคร</span>
+      <span style="font-size:10px;color:#555;">สำหรับบริษัท</span>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px 6px;font-size:10px;">
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> รูปถ่ายหน้าตรง ไม่เกิน 6 เดือน</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> สำเนาบัตรประชาชน</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> สำเนาทะเบียนบ้าน</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> ใบรับรองการศึกษา</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> หลักฐานการเปลี่ยนชื่อ-สกุล (ถ้ามี)</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> ใบขับขี่</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> สำเนาทะเบียนสมรส (ถ้ามี)</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> ใบผ่านทหาร สด.9/สด.13 (ถ้ามี)</label>
+      <label class="ck" style="font-size:10px;"><input type="checkbox" disabled> หนังสือรับรองการผ่านงาน (ถ้ามี)</label>
+      <div style="grid-column:span 3;display:flex;align-items:center;gap:3px;font-size:10px;"><input type="checkbox" disabled> อื่นๆ <input class="ul" type="text" placeholder="ระบุ..." style="width:180px;margin-left:2px;font-size:10px;" disabled></div>
+    </div>
+  </div>
+  <div style="font-size:9.5px;font-style:italic;margin-bottom:3px;">ใบสมัครเป็นส่วนหนึ่งในการพิจารณา โปรดกรอกข้อมูลให้ครบถ้วน</div>
+
+  <div class="sec">ประวัติส่วนตัว / PERSONAL INFORMATION</div>
+
+  <div class="row">
+    <div class="flb"><span class="lbl">คำนำหน้า</span><select class="ul" style="width:82px;"><option value="">-- เลือก --</option><option>นาย</option><option>นาง</option><option>นางสาว</option></select></div>
+    <div class="flb f3"><span class="lbl">ชื่อ-นามสกุล (ภาษาไทย) / NAME AND SURNAME (THAI)</span><input class="ul" type="text" id="name_th"></div>
+    <div class="flb"><span class="lbl">ชื่อเล่น / NICK NAME</span><input class="ul" type="text" style="width:88px;"></div>
+  </div>
+  <div class="row">
+    <div class="flb"><span class="lbl">Title</span><select class="ul" style="width:60px;"><option></option><option>Mr.</option><option>Miss.</option><option>Mrs.</option></select></div>
+    <div class="flb f3"><span class="lbl">ชื่อ-นามสกุล (ภาษาอังกฤษ) / NAME AND SURNAME (ENGLISH)</span><input class="ul" type="text"></div>
+    <div class="flb"><span class="lbl">เพศ / GENDER</span><div style="display:flex;gap:5px;"><label class="ck"><input type="radio" name="sex"> ชาย</label><label class="ck"><input type="radio" name="sex"> หญิง</label></div></div>
+  </div>
+  <div class="row">
+    <div class="flb f1"><span class="lbl">อายุ / AGE</span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">กรุ๊ปเลือด<br><span class="lbl-en">BLOOD TYPE</span></span><select class="ul"><option></option><option>A</option><option>B</option><option>AB</option><option>O</option></select></div>
+    <div class="flb f1"><span class="lbl">น้ำหนัก (กก.)</span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">ส่วนสูง (ซม.)</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">เบอร์โทรศัพท์ / PHONE NUMBER</span><input class="ul" type="text" id="phone"></div>
+  </div>
+  <div class="row">
+    <div class="flb f2"><span class="lbl">อีเมล / EMAIL</span><input class="ul" type="email" id="email"></div>
+    <div class="flb f1"><span class="lbl">ID LINE</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">Facebook / ช่องทางออนไลน์อื่น</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row">
+    <div class="flb f2"><span class="lbl">วัน-เดือน-ปีเกิด / DATE OF BIRTH</span><div class="dg"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div></div>
+    <div class="flb f2"><span class="lbl">สถานที่เกิด (จังหวัด) / PROVINCE OF BIRTH</span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">ศาสนา / RELIGION</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row">
+    <div class="flb f1"><span class="lbl">สัญชาติ<br><span class="lbl-en">NATIONALITY</span></span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">เชื้อชาติ<br><span class="lbl-en">RACE</span></span><input class="ul" type="text"></div>
+    <div class="flb f3"><span class="lbl">สถานภาพทางทหาร / MILITARY STATUS</span>
+      <div style="display:flex;align-items:center;gap:6px;"><label class="ck"><input type="radio" name="mil"> ผ่านการเกณฑ์ทหารแล้ว</label><label class="ck"><input type="radio" name="mil"> ได้รับการยกเว้น เนื่องจาก</label><input class="ul" type="text" style="flex:1;"></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="flb f3"><span class="lbl">หมายเลขบัตรประชาชน / IDENTIFICATION NO.</span><input class="ul" type="text" maxlength="13"></div>
+    <div class="flb f2"><span class="lbl">ออกที่อำเภอ / ISSUE AT</span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">จังหวัด</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">วันออกบัตร / ISSUE DATE</span><div class="dg"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div></div>
+    <div class="flb f2"><span class="lbl">วันหมดอายุ / EXPIRED DATE</span><div class="dg"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div></div>
+  </div>
+  <div class="row"><div class="flb" style="flex:1;"><span class="lbl">ที่อยู่ปัจจุบัน / PRESENT ADDRESS</span><input class="ul" type="text" id="addr1" oninput="syncAddr()"></div></div>
+  <div style="margin-bottom:2px;font-size:11px;">
+    <span class="lbl">พักอยู่กับ / RESIDENCE : </span>
+    <label class="ck"><input type="radio" name="res"> บ้านบิดา-มารดา</label>&nbsp;
+    <label class="ck"><input type="radio" name="res"> บ้านพักตนเอง</label>&nbsp;
+    <label class="ck"><input type="radio" name="res"> บ้านเช่า</label>&nbsp;
+    <label class="ck"><input type="radio" name="res"> หอพัก</label>&nbsp;
+    <label class="ck"><input type="radio" name="res"> อื่นๆ</label>
+    <input class="ul" type="text" style="width:80px;">
+  </div>
+  <div class="row">
+    <div class="flb" style="flex:1;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:1px;"><span class="lbl">ที่อยู่ตามทะเบียนบ้าน / Permanent Address</span><label class="ck"><input type="checkbox" id="sameaddr" onchange="toggleAddr(this)"> ที่อยู่เดียวกับปัจจุบัน</label></div>
+      <input class="ul" type="text" id="addr2">
+    </div>
+  </div>
+  <div style="margin-bottom:2px;font-size:11px;">
+    <span class="lbl">สถานภาพการสมรส / MARITAL STATUS : </span>
+    <label class="ck"><input type="radio" name="mar"> โสด</label>&nbsp;
+    <label class="ck"><input type="radio" name="mar"> สมรส</label>&nbsp;
+    <label class="ck"><input type="radio" name="mar"> หย่าร้าง</label>&nbsp;
+    <label class="ck"><input type="radio" name="mar"> แยกกันอยู่</label>&nbsp;
+    <span class="lbl">กรณีสมรส :</span>&nbsp;
+    <label class="ck"><input type="radio" name="mreg"> จดทะเบียน</label>&nbsp;
+    <label class="ck"><input type="radio" name="mreg"> ไม่ได้จดทะเบียน</label>
+  </div>
+  <div class="row">
+    <div class="flb f3"><span class="lbl">ชื่อคู่สมรส / Spouse's Name</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">อาชีพ / Occupation</span><input class="ul" type="text"></div>
+    <div class="flb f3"><span class="lbl">สถานที่ทำงาน / Firm Address</span><input class="ul" type="text"></div>
+    <div class="flb"><span class="lbl">มีบุตร</span><div style="display:flex;gap:2px;align-items:flex-end;"><input class="ul" type="text" style="width:32px;"><span style="font-size:11px;">คน</span></div></div>
+  </div>
+  <div class="row">
+    <div class="flb f3"><span class="lbl">ชื่อบิดา / FATHER'S NAME</span><input class="ul" type="text"></div>
+    <label class="ck"><input type="radio" name="fst"> มีชีวิตอยู่</label>
+    <label class="ck"><input type="radio" name="fst"> ถึงแก่กรรม</label>
+    <div class="flb f1"><span class="lbl">อายุ</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">อาชีพ / Occupation</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row">
+    <div class="flb f3"><span class="lbl">ชื่อมารดา / MOTHER'S NAME</span><input class="ul" type="text"></div>
+    <label class="ck"><input type="radio" name="mst"> มีชีวิตอยู่</label>
+    <label class="ck"><input type="radio" name="mst"> ถึงแก่กรรม</label>
+    <div class="flb f1"><span class="lbl">อายุ</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">อาชีพ / Occupation</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row">
+    <span class="lbl" style="white-space:nowrap;">จำนวนพี่น้อง (รวมผู้สมัคร) :</span>
+    <input class="ul" type="text" style="width:36px;">
+    <span class="lbl">คน</span>
+    <span class="lbl" style="white-space:nowrap;padding-left:8px;">เป็นบุตรลำดับที่ :</span>
+    <input class="ul" type="text" style="width:50px;">
+    <span class="lbl" style="white-space:nowrap;padding-left:8px;">จำนวนพี่/น้องที่ทำงานแล้ว :</span>
+    <input class="ul" type="text" style="width:36px;">
+    <span class="lbl">คน</span>
+  </div>
+
+  <div class="sec">ประวัติการศึกษา / EDUCATION</div>
+  <table class="t">
+    <thead>
+      <tr>
+        <th style="width:18%;">ระดับการศึกษา<br>DEGREE LEVEL</th>
+        <th style="width:27%;">ชื่อสถาบันการศึกษา<br>INSTITUTION NAME</th>
+        <th style="width:18%;">คณะ/สาขา<br>MAJOR - SUBJECT</th>
+        <th style="width:9%;">ตั้งแต่<br>FROM</th>
+        <th style="width:9%;">ถึง<br>TO</th>
+        <th style="width:12%;">วุฒิการศึกษา<br>CERTIFICATE</th>
+        <th style="width:7%;">GPA</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>ประถมศึกษา<br><span style="font-size:8.5px;">ELEMENTARY</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td>มัธยมต้น<br><span style="font-size:8.5px;">JUNIOR SEC.</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td>มัธยมปลาย/ปวช<br><span style="font-size:8.5px;">SENIOR SEC.</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td>อนุปริญญา/ปวส<br><span style="font-size:8.5px;">DIPLOMA</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td>ปริญญาตรี<br><span style="font-size:8.5px;">BACHELOR</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td>ปริญญาโทขึ้นไป<br><span style="font-size:8.5px;">MASTER+</span></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+    </tbody>
+  </table>
+  <div class="pg-code">FM-HRS-03, Rev:01 | หน้า 1/4</div>
+</div>
+
+<!-- ===== PAGE 2 ===== -->
+<div class="page">
+  <div class="sec">ความชำนาญพิเศษ / SPECIAL SKILL</div>
+  <table class="t" style="margin-bottom:5px;">
+    <thead>
+      <tr>
+        <th rowspan="2" style="width:20%;">ภาษาต่างประเทศ<br>LANGUAGES ABILITY</th>
+        <th colspan="3">ฟัง/ความเข้าใจ LISTENING</th>
+        <th colspan="3">พูด SPEAKING</th>
+        <th colspan="3">อ่าน/เขียน READING/WRITING</th>
+      </tr>
+      <tr><th>ดีมาก</th><th>ดี</th><th>พอใช้</th><th>ดีมาก</th><th>ดี</th><th>พอใช้</th><th>ดีมาก</th><th>ดี</th><th>พอใช้</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ภาษาอังกฤษ / ENGLISH</td>
+        <td style="text-align:center;"><input type="radio" name="el"></td><td style="text-align:center;"><input type="radio" name="el"></td><td style="text-align:center;"><input type="radio" name="el"></td>
+        <td style="text-align:center;"><input type="radio" name="es"></td><td style="text-align:center;"><input type="radio" name="es"></td><td style="text-align:center;"><input type="radio" name="es"></td>
+        <td style="text-align:center;"><input type="radio" name="er"></td><td style="text-align:center;"><input type="radio" name="er"></td><td style="text-align:center;"><input type="radio" name="er"></td>
+      </tr>
+      <tr>
+        <td><input class="ul" type="text" placeholder="ภาษา..."></td>
+        <td style="text-align:center;"><input type="radio" name="l2l"></td><td style="text-align:center;"><input type="radio" name="l2l"></td><td style="text-align:center;"><input type="radio" name="l2l"></td>
+        <td style="text-align:center;"><input type="radio" name="l2s"></td><td style="text-align:center;"><input type="radio" name="l2s"></td><td style="text-align:center;"><input type="radio" name="l2s"></td>
+        <td style="text-align:center;"><input type="radio" name="l2r"></td><td style="text-align:center;"><input type="radio" name="l2r"></td><td style="text-align:center;"><input type="radio" name="l2r"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="sec">ประวัติการทำงาน เรียงจากปัจจุบันไปอดีต / EMPLOYMENT HISTORY (Most Recent First)</div>
+
+  <!-- Work 1 -->
+  <div class="wb">
+    <div class="wb-hdr">1)</div>
+    <table class="t" style="margin:0;"><tbody>
+      <tr>
+        <td style="width:32%;border-left:none;border-top:none;"><span style="font-size:9.5px;">ชื่อสถานที่ทำงาน / EMPLOYER'S NAME</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ประเภทธุรกิจ / BUSINESS TYPE</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ตำแหน่ง / POSITION</span><br><input class="ul" type="text"></td>
+        <td style="width:20%;border-top:none;border-right:none;"><span style="font-size:9.5px;">ค่าจ้าง / SALARY</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr>
+        <td style="border-left:none;"><span style="font-size:9.5px;">วันที่เริ่มงาน / START DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td><span style="font-size:9.5px;">วันที่สิ้นสุด / END DATE</span><br><div style="display:flex;align-items:center;gap:4px;"><input class="ul" type="text" placeholder="วว/ดด/ปปปป" style="flex:1;" id="end1"><label class="ck" style="font-size:9.5px;white-space:nowrap;"><input type="checkbox" onchange="toggleEnd1(this)"> ถึงปัจจุบัน</label></div></td>
+        <td colspan="2" style="border-right:none;"><span style="font-size:9.5px;">เหตุผลที่ลาออก / REASON FOR LEAVING</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr><td colspan="4" style="border-left:none;border-right:none;border-bottom:none;"><span style="font-size:9.5px;">ลักษณะของงาน / JOB DESCRIPTION</span><br><textarea class="ta" rows="3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <!-- Work 2 -->
+  <div class="wb">
+    <div class="wb-hdr">2)</div>
+    <table class="t" style="margin:0;"><tbody>
+      <tr>
+        <td style="width:32%;border-left:none;border-top:none;"><span style="font-size:9.5px;">ชื่อสถานที่ทำงาน / EMPLOYER'S NAME</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ประเภทธุรกิจ / BUSINESS TYPE</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ตำแหน่ง / POSITION</span><br><input class="ul" type="text"></td>
+        <td style="width:20%;border-top:none;border-right:none;"><span style="font-size:9.5px;">ค่าจ้าง / SALARY</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr>
+        <td style="border-left:none;"><span style="font-size:9.5px;">วันที่เริ่มงาน / START DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td><span style="font-size:9.5px;">วันที่สิ้นสุด / END DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td colspan="2" style="border-right:none;"><span style="font-size:9.5px;">เหตุผลที่ลาออก / REASON FOR LEAVING</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr><td colspan="4" style="border-left:none;border-right:none;border-bottom:none;"><span style="font-size:9.5px;">ลักษณะของงาน / JOB DESCRIPTION</span><br><textarea class="ta" rows="3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <!-- Work 3 -->
+  <div class="wb">
+    <div class="wb-hdr">3)</div>
+    <table class="t" style="margin:0;"><tbody>
+      <tr>
+        <td style="width:32%;border-left:none;border-top:none;"><span style="font-size:9.5px;">ชื่อสถานที่ทำงาน / EMPLOYER'S NAME</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ประเภทธุรกิจ / BUSINESS TYPE</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ตำแหน่ง / POSITION</span><br><input class="ul" type="text"></td>
+        <td style="width:20%;border-top:none;border-right:none;"><span style="font-size:9.5px;">ค่าจ้าง / SALARY</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr>
+        <td style="border-left:none;"><span style="font-size:9.5px;">วันที่เริ่มงาน / START DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td><span style="font-size:9.5px;">วันที่สิ้นสุด / END DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td colspan="2" style="border-right:none;"><span style="font-size:9.5px;">เหตุผลที่ลาออก / REASON FOR LEAVING</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr><td colspan="4" style="border-left:none;border-right:none;border-bottom:none;"><span style="font-size:9.5px;">ลักษณะของงาน / JOB DESCRIPTION</span><br><textarea class="ta" rows="3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <!-- Work 4 -->
+  <div class="wb">
+    <div class="wb-hdr">4)</div>
+    <table class="t" style="margin:0;"><tbody>
+      <tr>
+        <td style="width:32%;border-left:none;border-top:none;"><span style="font-size:9.5px;">ชื่อสถานที่ทำงาน / EMPLOYER'S NAME</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ประเภทธุรกิจ / BUSINESS TYPE</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ตำแหน่ง / POSITION</span><br><input class="ul" type="text"></td>
+        <td style="width:20%;border-top:none;border-right:none;"><span style="font-size:9.5px;">ค่าจ้าง / SALARY</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr>
+        <td style="border-left:none;"><span style="font-size:9.5px;">วันที่เริ่มงาน / START DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td><span style="font-size:9.5px;">วันที่สิ้นสุด / END DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td colspan="2" style="border-right:none;"><span style="font-size:9.5px;">เหตุผลที่ลาออก / REASON FOR LEAVING</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr><td colspan="4" style="border-left:none;border-right:none;border-bottom:none;"><span style="font-size:9.5px;">ลักษณะของงาน / JOB DESCRIPTION</span><br><textarea class="ta" rows="3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+  <!-- Work 5 -->
+  <div class="wb">
+    <div class="wb-hdr">5)</div>
+    <table class="t" style="margin:0;"><tbody>
+      <tr>
+        <td style="width:32%;border-left:none;border-top:none;"><span style="font-size:9.5px;">ชื่อสถานที่ทำงาน / EMPLOYER'S NAME</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ประเภทธุรกิจ / BUSINESS TYPE</span><br><input class="ul" type="text"></td>
+        <td style="width:24%;border-top:none;"><span style="font-size:9.5px;">ตำแหน่ง / POSITION</span><br><input class="ul" type="text"></td>
+        <td style="width:20%;border-top:none;border-right:none;"><span style="font-size:9.5px;">ค่าจ้าง / SALARY</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr>
+        <td style="border-left:none;"><span style="font-size:9.5px;">วันที่เริ่มงาน / START DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td><span style="font-size:9.5px;">วันที่สิ้นสุด / END DATE</span><br><input class="ul" type="text" placeholder="วว/ดด/ปปปป"></td>
+        <td colspan="2" style="border-right:none;"><span style="font-size:9.5px;">เหตุผลที่ลาออก / REASON FOR LEAVING</span><br><input class="ul" type="text"></td>
+      </tr>
+      <tr><td colspan="4" style="border-left:none;border-right:none;border-bottom:none;"><span style="font-size:9.5px;">ลักษณะของงาน / JOB DESCRIPTION</span><br><textarea class="ta" rows="3"></textarea></td></tr>
+    </tbody></table>
+  </div>
+
+  <div class="sec">กรณีฉุกเฉิน / EMERGENCY CONTACT</div>
+  <div class="row">
+    <div class="flb f3"><span class="lbl">ชื่อ-นามสกุล / NAME</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">เกี่ยวข้องกับผู้สมัคร / RELATIONSHIP</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">เบอร์โทรศัพท์ / PHONE</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row"><div class="flb" style="flex:1;"><span class="lbl">ที่อยู่/สถานที่ทำงาน / ADDRESS / WORKPLACE</span><input class="ul" type="text"></div></div>
+  <div class="pg-code">FM-HRS-03, Rev:01 | หน้า 2/4</div>
+</div>
+
+<!-- ===== PAGE 3 ===== -->
+<div class="page">
+  <div style="font-size:12.5px;font-weight:bold;margin-bottom:2px;">บุคคลที่ไม่ใช่ญาติซึ่งทราบประวัติของท่านและบริษัทฯ สามารถสอบถามได้</div>
+  <div style="font-size:10px;margin-bottom:5px;">Persons other than relatives can be contacted</div>
+  <table class="t" style="margin-bottom:5px;">
+    <thead><tr><th>ชื่อ-สกุล / Name</th><th>ความสัมพันธ์ / Relationship</th><th>สถานที่ทำงาน/ที่อยู่ / Firm Address</th><th>ตำแหน่ง / Position</th><th>โทรศัพท์ / Tel.</th></tr></thead>
+    <tbody>
+      <tr><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+      <tr><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td><td><input class="ul" type="text"></td></tr>
+    </tbody>
+  </table>
+
+  <div class="row" style="margin-bottom:6px;">
+    <div class="flb f2"><span class="lbl">ความรู้คอมพิวเตอร์ / Computer — โปรแกรมที่ใช้ได้</span><input class="ul" type="text"></div>
+    <div class="flb f1"><span class="lbl">อื่นๆ / Other</span><input class="ul" type="text"></div>
+  </div>
+  <div class="row" style="margin-bottom:8px;">
+    <div class="flb f2"><span class="lbl">ความสามารถพิเศษ / Special Ability</span><input class="ul" type="text"></div>
+    <div class="flb f2"><span class="lbl">งานอดิเรก / Hobby</span><input class="ul" type="text"></div>
+  </div>
+
+  <div class="cond"><div class="cond-t">ในตำแหน่งงานนี้ต้องมีเงินสดค้ำประกัน จำนวน 5,000 บาท จะได้รับคืนตามเงื่อนไขของบริษัท</div><div class="cond-c"><label class="ck"><input type="radio" name="c1"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c1"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ในการปฏิบัติงานสามารถเปลี่ยนตำแหน่งหน้าที่ได้ตามความเหมาะสม</div><div class="cond-c"><label class="ck"><input type="radio" name="c2"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c2"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ในการปฏิบัติงานต้องมีรถยนต์เป็นของตนเองและสามารถนำมาใช้งานได้</div><div class="cond-c"><label class="ck"><input type="radio" name="c3"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c3"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ในการปฏิบัติงานสามารถเข้าทำงานในห้องผ่าตัด ออกบูธ และไปต่างจังหวัดได้</div><div class="cond-c"><label class="ck"><input type="radio" name="c4"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c4"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ก่อนการปฏิบัติงานต้องมีการตรวจสุขภาพก่อนเริ่มงาน</div><div class="cond-c"><label class="ck"><input type="radio" name="c5"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c5"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">การพิจารณาบริษัทสามารถสอบถามข้อมูลของท่านจากบริษัทเดิม</div><div class="cond-c"><label class="ck"><input type="radio" name="c6"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c6"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ในการปฏิบัติงานต้องมีการตรวจประวัติอาชญากรรมก่อนเริ่มงาน</div><div class="cond-c"><label class="ck"><input type="radio" name="c7"> ไม่ขัดข้อง</label><label class="ck"><input type="radio" name="c7"> ขัดข้อง</label></div></div>
+  <div class="cond"><div class="cond-t">ท่านมีอาชีพเสริมหรือรายได้เสริม นอกเหนือจากงานประจำหรือไม่</div><div class="cond-c"><label class="ck"><input type="radio" name="c8"> ไม่มี</label><label class="ck"><input type="radio" name="c8"> มี โปรดระบุ</label><input class="ul" type="text" style="width:80px;"></div></div>
+  <div style="font-size:10.5px;padding:2px 0;border-bottom:1px dashed #bbb;margin-bottom:4px;">
+    ในระหว่างการปฏิบัติงานบริษัทฯ <strong>"ไม่อนุญาต"</strong> ให้พนักงานหารายได้เสริมอื่นๆ ถือเป็นความผิดร้ายแรง
+    <label class="ck" style="margin-left:8px;"><input type="checkbox"> รับทราบ และจะปฏิบัติตามระเบียบ</label>
+  </div>
+
+  <div class="row" style="margin-bottom:4px;">
+    <span class="lbl" style="white-space:nowrap;">บุคคลในบริษัทฯ ที่ท่านรู้จักคุ้นเคย ชื่อ :</span>
+    <input class="ul" type="text" style="flex:2;">
+    <span class="lbl" style="white-space:nowrap;padding-left:6px;">ความสัมพันธ์ :</span>
+    <input class="ul" type="text" style="flex:2;">
+  </div>
+
+  <div style="margin-bottom:4px;">
+    <div class="lbl" style="margin-bottom:1px;">กรุณาแนะนำตัวท่านเอง เพื่อให้บริษัทรู้จักตัวท่านดีขึ้น :</div>
+    <textarea class="ta" rows="5"></textarea>
+  </div>
+
+  <div style="display:flex;align-items:flex-end;gap:5px;margin-bottom:6px;">
+    <span class="lbl" style="white-space:nowrap;">ท่านพร้อมที่จะเริ่มงานกับบริษัทฯ ได้วันที่ :</span>
+    <div class="dg" style="flex:1;max-width:260px;"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div>
+  </div>
+
+  <div style="font-size:10.5px;line-height:1.65;text-align:justify;margin-bottom:6px;">
+    ข้าพเจ้า ขอรับรองว่าข้อความข้างต้นและเอกสารหลักฐานในการสมัครงานนี้เป็นความจริงทุกประการ หากข้อความตอนหนึ่งตอนใดหรือเอกสารหลักฐานใดเป็นเท็จหรือไม่ตรงกับความเป็นจริง หรือหากข้าพเจ้าปกปิดหรือบิดเบือนข้อเท็จจริง นำหลักฐานเท็จ หรือให้ข้อความที่เป็นเท็จแก่บริษัทอันอาจเป็นเหตุให้บริษัทได้รับความเสียหาย ถือว่าเป็นความผิดวินัยร้ายแรง ข้าพเจ้า ยินยอมให้บริษัทพิจารณาตามระเบียบข้อบังคับการทำงานของบริษัท โดยให้ยุติการทำงานและเลิกสัญญาได้ทันที โดยข้าพเจ้ายอมรับผิดและขอสละสิทธ์ในการเรียกร้องใดๆ ทั้งสิ้นจากบริษัท
+  </div>
+
+  <div style="text-align:center;margin-bottom:8px;font-size:12px;">
+    ลงชื่อผู้สมัครงาน .........................................................(ตัวบรรจง) &nbsp;&nbsp;
+    วันที่ <div class="dg" style="display:inline-flex;width:200px;vertical-align:bottom;"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div>
+  </div>
+
+  <div class="co-box" style="background:#fafafa;">
+    <div style="font-weight:bold;font-size:12.5px;text-align:center;margin-bottom:4px;">สำหรับบริษัท / FOR COMPANY USE ONLY</div>
+    <div style="font-size:12px;font-weight:bold;margin-bottom:2px;">การพิจารณาว่าจ้าง</div>
+    <div style="margin-bottom:3px;"><label class="ck"><input type="radio" name="hire" disabled> รับ</label>&nbsp;&nbsp;<label class="ck"><input type="radio" name="hire" disabled> ไม่รับ</label></div>
+    <div class="row">
+      <div class="flb f2"><span class="lbl">ตำแหน่ง / Position</span><input class="ul" type="text" disabled></div>
+      <div class="flb f2"><span class="lbl">แผนก / Department</span><input class="ul" type="text" disabled></div>
+      <div class="flb f2"><span class="lbl">เงินเดือน (บาท/เดือน)</span><input class="ul" type="text" disabled></div>
+    </div>
+    <div class="row">
+      <div class="flb f1"><span class="lbl">วันเริ่มงาน / Work Start Date</span><input class="ul" type="text" disabled></div>
+      <div class="flb f3"><span class="lbl">เงื่อนไขของบริษัทฯ / Company's Conditions</span><input class="ul" type="text" disabled></div>
+    </div>
+    <div class="row" style="margin-bottom:6px;"><div class="flb" style="flex:1;"><span class="lbl">ค่าใช้จ่ายอื่นๆ / Allowances</span><input class="ul" type="text" disabled></div></div>
+    <div class="sig-area">
+      <div class="sig-box">ฝ่ายบุคคล<br><span style="font-size:9px;">HR</span></div>
+      <div class="sig-box">หัวหน้าแผนก / ผู้จัดการ<br><span style="font-size:9px;">Manager</span></div>
+      <div class="sig-box">ผู้อนุมัติ<br><span style="font-size:9px;">Authorized Signature</span></div>
+    </div>
+  </div>
+  <div class="pg-code">FM-HRS-03, Rev:01 | หน้า 3/4</div>
+</div>
+
+<!-- ===== PAGE 4 — PDPA ===== -->
+<div class="page">
+  <div style="text-align:center;margin-bottom:8px;">
+    <div style="font-size:10px;color:#555;margin-bottom:3px;border:1px solid #ccc;display:inline-block;padding:1px 10px;">ใบประกอบใบสมัครงาน</div><br>
+    <div style="font-size:16px;font-weight:bold;line-height:1.5;">ประกาศการคุ้มครองข้อมูลส่วนบุคคลสำหรับผู้สมัครงาน</div>
+    <div style="font-size:12px;">(Privacy Notice for Job Applicants)</div>
+  </div>
+
+  <div class="pdpa-body">
+    <p>บริษัท พี.เอส.ฮอสพิทอล โปรดักส์ จำกัด และบริษัท เจนนิคอน จำกัด ("บริษัทฯ") ให้ความสำคัญกับการคุ้มครองข้อมูลส่วนบุคคลของผู้สมัครงาน และดำเนินการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของท่านตามพระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 ("PDPA") โดยมีรายละเอียดดังต่อไปนี้</p>
+
+    <p class="pdpa-h">ผู้ควบคุมข้อมูลส่วนบุคคล</p>
+    <p style="text-indent:1.5em;">บริษัท พี.เอส.ฮอสพิทอล โปรดักส์ จำกัด และบริษัท เจนนิคอน จำกัด เป็นผู้ควบคุมข้อมูลส่วนบุคคลที่เก็บรวบรวมจากผู้สมัครงาน เพื่อวัตถุประสงค์ในการสรรหาและคัดเลือกบุคลากร</p>
+
+    <p class="pdpa-h">ข้อมูลส่วนบุคคลที่บริษัทฯ เก็บรวบรวม</p>
+    <p style="text-indent:1.5em;">บริษัทฯ อาจเก็บรวบรวมข้อมูลส่วนบุคคลของท่าน ได้แก่</p>
+    <ul>
+      <li>ข้อมูลระบุตัวตน เช่น ชื่อ-นามสกุล ชื่อเล่น รูปถ่าย วันเดือนปีเกิด อายุ เพศ สัญชาติ</li>
+      <li>ข้อมูลการติดต่อ เช่น ที่อยู่ เบอร์โทรศัพท์ อีเมล</li>
+      <li>ข้อมูลประจำตัว เช่น หมายเลขบัตรประจำตัวประชาชน หรือเอกสารแสดงตนอื่น</li>
+      <li>ข้อมูลด้านการศึกษา การฝึกอบรม และคุณวุฒิวิชาชีพ</li>
+      <li>ข้อมูลประวัติการทำงาน ประสบการณ์ เงินเดือน และผลตอบแทนเดิม</li>
+      <li>ข้อมูลบุคคลอ้างอิง</li>
+      <li>ข้อมูลที่ปรากฏใน Resume, CV, Portfolio หรือเอกสารประกอบการสมัครงาน</li>
+      <li>ข้อมูลอื่นใดที่ผู้สมัครเปิดเผยต่อบริษัทฯ ในระหว่างกระบวนการสมัครงาน</li>
+    </ul>
+
+    <p class="pdpa-h">วัตถุประสงค์ในการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคล</p>
+    <p style="text-indent:1.5em;">บริษัทฯ เก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของท่านเพื่อวัตถุประสงค์ดังต่อไปนี้</p>
+    <ul style="list-style-type:none;margin-left:1em;">
+      <li>3.1 เพื่อพิจารณาคุณสมบัติ ความเหมาะสม และคัดเลือกบุคลากรเข้าทำงาน</li>
+      <li>3.2 เพื่อติดต่อ นัดหมายสัมภาษณ์ แจ้งผลการสมัครงาน และประสานงานที่เกี่ยวข้อง</li>
+      <li>3.3 เพื่อตรวจสอบข้อมูล ประวัติการทำงาน และคุณสมบัติของผู้สมัคร</li>
+      <li>3.4 เพื่อจัดทำฐานข้อมูลผู้สมัครงานสำหรับตำแหน่งงานปัจจุบันและตำแหน่งงานในอนาคต</li>
+      <li>3.5 เพื่อปฏิบัติตามกฎหมาย ระเบียบ หรือคำสั่งของหน่วยงานราชการที่เกี่ยวข้อง</li>
+      <li>3.6 เพื่อประโยชน์โดยชอบด้วยกฎหมายของบริษัทฯ ในการบริหารจัดการทรัพยากรบุคคล</li>
+      <li>3.7 เพื่อการตรวจสอบภายใน การตรวจติดตาม การรับรองมาตรฐานคุณภาพ การปฏิบัติตามข้อกำหนดของหน่วยงานกำกับดูแล ลูกค้า คู่ค้า หรือมาตรฐานที่เกี่ยวข้องกับการดำเนินธุรกิจของบริษัทฯ เช่น ISO 13485, GDPMD และมาตรฐานอื่นที่เกี่ยวข้อง</li>
+    </ul>
+
+    <p class="pdpa-h">ฐานกฎหมายในการประมวลผลข้อมูล</p>
+    <p style="text-indent:1.5em;">บริษัทฯ ประมวลผลข้อมูลส่วนบุคคลของท่านภายใต้ฐานกฎหมายดังต่อไปนี้</p>
+    <ul>
+      <li>เพื่อดำเนินการตามคำขอของเจ้าของข้อมูลก่อนเข้าทำสัญญาจ้างงาน</li>
+      <li>เพื่อประโยชน์โดยชอบด้วยกฎหมายของบริษัทฯ</li>
+      <li>เพื่อปฏิบัติตามกฎหมายที่เกี่ยวข้อง</li>
+      <li>กรณีจำเป็น บริษัทฯ อาจขอความยินยอมเพิ่มเติมจากท่านเป็นการเฉพาะ</li>
+    </ul>
+
+    <p class="pdpa-h">การเปิดเผยข้อมูลส่วนบุคคล</p>
+    <p style="text-indent:1.5em;">บริษัทฯ อาจเปิดเผยข้อมูลส่วนบุคคลของท่านแก่</p>
+    <ul>
+      <li>บริษัทในเครือหรือบริษัทที่เกี่ยวข้อง</li>
+      <li>ผู้บริหารและผู้มีอำนาจพิจารณาคัดเลือกบุคลากร</li>
+      <li>ผู้ให้บริการที่เกี่ยวข้องกับการสรรหาและบริหารทรัพยากรบุคคล</li>
+      <li>หน่วยงานราชการหรือหน่วยงานที่มีอำนาจตามกฎหมาย</li>
+    </ul>
+    <p style="text-indent:1.5em;">ทั้งนี้ บริษัทฯ จะดำเนินการเท่าที่จำเป็นและภายใต้มาตรการรักษาความปลอดภัยที่เหมาะสม</p>
+
+    <p class="pdpa-h">ระยะเวลาในการเก็บรักษาข้อมูล</p>
+    <p style="text-indent:1.5em;">กรณีผู้สมัครไม่ได้รับการคัดเลือก บริษัทฯ จะเก็บรักษาข้อมูลส่วนบุคคลของท่านไว้เป็นระยะเวลาไม่เกิน 2 ปี นับจากวันที่สิ้นสุดกระบวนการคัดเลือก เพื่อใช้พิจารณาตำแหน่งงานที่อาจเหมาะสมในอนาคต</p>
+    <p style="font-weight:bold;margin-top:3px;margin-bottom:1px;">กรณีผู้สมัครได้รับการคัดเลือกเข้าทำงาน</p>
+    <p style="text-indent:1.5em;">ในกรณีที่ผู้สมัครได้รับการคัดเลือกเข้าทำงานกับบริษัทฯ บริษัทฯ อาจนำข้อมูลส่วนบุคคลที่ได้เก็บรวบรวมไว้ในระหว่างกระบวนการสมัครงานไปใช้เพื่อวัตถุประสงค์ในการบริหารงานทรัพยากรบุคคลและการปฏิบัติตามกฎหมายที่เกี่ยวข้อง อาทิ</p>
+    <ul>
+      <li>การจัดทำประวัติพนักงาน และการจัดทำสัญญาจ้างงาน</li>
+      <li>การจ่ายค่าจ้าง ค่าตอบแทน ค่าคอมมิชชั่น โบนัส และสิทธิประโยชน์ต่าง ๆ</li>
+      <li>การจัดสวัสดิการและสิทธิประโยชน์ของพนักงาน</li>
+      <li>การประเมินผลการปฏิบัติงาน การพัฒนาบุคลากร และการฝึกอบรม</li>
+      <li>การบริหารจัดการด้านเวลาทำงาน การลา การมอบหมายงาน และการบริหารทรัพยากรบุคคล</li>
+      <li>การติดต่อประสานงานในกรณีฉุกเฉิน</li>
+      <li>การปฏิบัติตามกฎหมายแรงงาน กฎหมายประกันสังคม กฎหมายภาษีอากร และกฎหมายอื่นที่เกี่ยวข้อง</li>
+      <li>การดำเนินการตามมาตรฐานคุณภาพ ระบบบริหารจัดการ และข้อกำหนดทางกฎหมายที่เกี่ยวข้องกับการดำเนินธุรกิจของบริษัทฯ</li>
+    </ul>
+    <p style="text-indent:1.5em;">ทั้งนี้ บริษัทฯ จะดำเนินการเก็บรวบรวม ใช้ และเปิดเผยข้อมูลส่วนบุคคลของพนักงานตามประกาศการคุ้มครองข้อมูลส่วนบุคคลสำหรับพนักงาน (Employee Privacy Notice) และนโยบายคุ้มครองข้อมูลส่วนบุคคลของบริษัทฯ ที่มีผลใช้บังคับในขณะนั้น เมื่อครบกำหนดระยะเวลาดังกล่าว บริษัทฯ จะดำเนินการลบ ทำลาย หรือทำให้ข้อมูลไม่สามารถระบุตัวบุคคลได้</p>
+
+    <p class="pdpa-h">สิทธิของเจ้าของข้อมูลส่วนบุคคล</p>
+    <p style="text-indent:1.5em;">ท่านมีสิทธิตามกฎหมาย ดังนี้</p>
+    <ul>
+      <li>สิทธิขอเข้าถึงข้อมูลส่วนบุคคล</li>
+      <li>สิทธิขอรับสำเนาข้อมูลส่วนบุคคล</li>
+      <li>สิทธิขอแก้ไขข้อมูลให้ถูกต้อง</li>
+      <li>สิทธิขอลบหรือทำลายข้อมูลส่วนบุคคล</li>
+      <li>สิทธิขอระงับการใช้ข้อมูลส่วนบุคคล</li>
+      <li>สิทธิคัดค้านการประมวลผลข้อมูลส่วนบุคคล</li>
+      <li>สิทธิขอรับหรือโอนข้อมูลส่วนบุคคลตามที่กฎหมายกำหนด</li>
+      <li>สิทธิร้องเรียนต่อสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคล</li>
+    </ul>
+
+    <p class="pdpa-h">ช่องทางการติดต่อ</p>
+    <p style="text-indent:1.5em;margin-bottom:8px;">หากท่านมีข้อสงสัยหรือประสงค์จะใช้สิทธิเกี่ยวกับข้อมูลส่วนบุคคล สามารถติดต่อบริษัทฯ</p>
+
+    <div style="text-align:center;margin-bottom:8px;">
+      <label class="ck" style="font-size:11.5px;justify-content:center;">
+        <input type="checkbox" style="width:14px;height:14px;cursor:pointer;">
+        &nbsp;ข้าพเจ้าได้รับทราบและยินยอมตามประกาศการคุ้มครองข้อมูลส่วนบุคคลสำหรับผู้สมัครงานฉบับนี้แล้ว
+      </label>
+    </div>
+  </div>
+
+  <div style="margin-top:14px;text-align:center;">
+    <div style="display:inline-block;min-width:280px;">
+      <div style="font-size:12.5px;">ลงชื่อ .......................................................... ผู้สมัครงาน</div>
+      <div style="font-size:12.5px;margin-top:6px;">( .......................................................... )</div>
+      <div style="display:flex;align-items:flex-end;justify-content:center;gap:4px;margin-top:8px;">
+        <span class="lbl">วันที่</span>
+        <div class="dg" style="width:220px;"><select class="ul"><option value="">วัน</option></select><select class="ul"><option value="">เดือน</option></select><select class="ul"><option value="">ปี พ.ศ.</option></select></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pg-code">FM-HRS-03, Rev:01 | หน้า 4/4</div>
+</div>
+
+</div><!-- end wrap -->
+
+<script>
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby7Ta3MdEgYdXSBetTM_zH4-1jZYfyYMced1i8IDHkB6OIflgiTxi4zlp8yiqzzL5EgYA/exec';
+
+async function saveAndSend() {
+  // Popup ยืนยันก่อนส่ง
+  const confirmed = confirm(
+    'เมื่อท่านกด ตกลง ระบบจะดำเนินการส่งให้กับฝ่ายทรัพยากรบุคคลทันที จะไม่สามารถแก้ไขได้\n\n' +
+    'ขอให้ท่านตรวจสอบอีกครั้งก่อนดำเนินการ เพราะใบสมัครเป็นส่วนหนึ่งในการพิจารณา ขอให้ท่านกรอกให้ครบถ้วนและเป็นความจริง'
+  );
+  if (!confirmed) return;
+  // เก็บข้อมูลสำคัญ
+  const name = document.querySelector('#name_th') ? document.querySelector('#name_th').value : 
+               (document.querySelectorAll('input.ul')[6] ? document.querySelectorAll('input.ul')[6].value : '');
+  const position = document.querySelector('#position') ? document.querySelector('#position').value : '';
+  const phone = document.querySelector('#phone') ? document.querySelector('#phone').value : '';
+  const email = document.querySelector('#email') ? document.querySelector('#email').value : '';
+
+  // แสดง loading
+  const overlay = document.getElementById('loading-overlay');
+  const loadingText = document.getElementById('loading-text');
+  const btn = document.querySelector('.btn-save');
+  overlay.classList.add('active');
+  btn.disabled = true;
+  loadingText.textContent = 'กำลังสร้าง PDF...';
+
+  try {
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pages = document.querySelectorAll('.page');
+    
+    for (let i = 0; i < pages.length; i++) {
+      loadingText.textContent = `กำลังสร้าง PDF หน้าที่ ${i+1}/${pages.length}...`;
+      
+      // ซ่อน topbar ชั่วคราว
+      document.querySelector('.topbar').style.display = 'none';
+      
+      const canvas = await html2canvas(pages[i], {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        width: pages[i].offsetWidth,
+        height: pages[i].scrollHeight
+      });
+      
+      document.querySelector('.topbar').style.display = 'flex';
+      
+      const imgData = canvas.toDataURL('image/jpeg', 0.92);
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      const imgRatio = canvas.height / canvas.width;
+      const imgHeight = pdfWidth * imgRatio;
+      
+      if (i > 0) pdf.addPage();
+      
+      if (imgHeight <= pdfHeight) {
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, imgHeight);
+      } else {
+        // ถ้าเนื้อหายาวเกิน scale ให้พอดีหน้า
+        pdf.addImage(imgData, 'JPEG', 0, 0, pdfWidth, pdfHeight);
+      }
+    }
+    
+    // แปลง PDF เป็น base64
+    const pdfBase64 = pdf.output('datauristring').split(',')[1];
+    
+    loadingText.textContent = 'กำลังส่งอีเมล...';
+    
+    // ส่งไป Google Apps Script
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: name || 'ไม่ระบุชื่อ',
+        position: position || 'ไม่ระบุตำแหน่ง',
+        phone: phone || '-',
+        email: email || '-',
+        pdf: pdfBase64
+      })
+    });
+    
+    overlay.classList.remove('active');
+    btn.disabled = false;
+    
+    // ดาวน์โหลด PDF ให้ผู้สมัครด้วย
+    const safeName = (name || 'applicant').replace(/[^\u0E00-\u0E7Fa-zA-Z0-9]/g, '_');
+    pdf.save('FM-HRS-03_' + safeName + '.pdf');
+    
+    alert(
+      'ส่งใบสมัครสำเร็จ! ระบบได้ส่ง PDF ไปยัง HR เรียบร้อยแล้ว\n\n' +
+      'ขอให้ท่านเข้ารับการสัมภาษณ์ตามวันและเวลาที่ได้นัดหมาย และเตรียมเอกสารประกอบการสัมภาษณ์\n\n' +
+      '1. รูปถ่าย กรณีที่ท่านไม่ได้แนบรูปถ่ายมาพร้อมใบสมัครออนไลน์นี้\n' +
+      '2. สำเนาบัตรประชาชน\n' +
+      '3. สำเนาทะเบียนบ้าน\n' +
+      '4. สำเนาวุฒิการศึกษา\n' +
+      '5. สำเนาใบผ่านการเกณฑ์ทหาร สำหรับผู้ชาย\n' +
+      '6. สำเนาใบเปลี่ยนชื่อ-สกุล\n' +
+      '7. สำเนาใบขับขี่'
+    );
+    
+  } catch(err) {
+    overlay.classList.remove('active');
+    btn.disabled = false;
+    document.querySelector('.topbar').style.display = 'flex';
+    alert('เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง');
+
+
+  }
+}
+
+const MO = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
+function toggleEnd1(cb) {
+  const inp = document.getElementById('end1');
+  if (cb.checked) { inp.value = 'ปัจจุบัน'; inp.readOnly = true; inp.style.color='#555'; }
+  else { inp.value = ''; inp.readOnly = false; inp.style.color=''; }
+}
+function fillDates() {
+  const base = new Date().getFullYear() + 543;
+  document.querySelectorAll('.dg').forEach(g => {
+    const s = g.querySelectorAll('select');
+    if (s.length !== 3) return;
+    for (let d=1;d<=31;d++){const o=document.createElement('option');o.value=d;o.textContent=d;s[0].appendChild(o);}
+    MO.forEach((m,i)=>{const o=document.createElement('option');o.value=i+1;o.textContent=m;s[1].appendChild(o);});
+    for (let y=base-80;y<=base+5;y++){const o=document.createElement('option');o.value=y;o.textContent=y;s[2].appendChild(o);}
+  });
+}
+function prevPhoto(inp) {
+  if (!inp.files[0]) return;
+  const r = new FileReader();
+  r.onload = e => {
+    document.getElementById('photo-img').src = e.target.result;
+    document.getElementById('photo-img').style.display = 'block';
+    document.getElementById('photo-lbl').style.display = 'none';
+  };
+  r.readAsDataURL(inp.files[0]);
+}
+function syncAddr() {
+  if (document.getElementById('sameaddr').checked)
+    document.getElementById('addr2').value = document.getElementById('addr1').value;
+}
+function toggleAddr(cb) {
+  const a2 = document.getElementById('addr2');
+  if (cb.checked) { a2.value = document.getElementById('addr1').value; a2.readOnly=true; a2.style.background='#f5f5f5'; }
+  else { a2.readOnly=false; a2.style.background=''; }
+}
+fillDates();
+</script>
+</body>
+</html>
